@@ -32,10 +32,17 @@ Install the following dependencies
 - Raisim (https://github.com/leggedrobotics/raisimLib)
 - RaisimOgre (https://github.com/leggedrobotics/raisimOgre)
 - yaml-cpp (sudo apt-get install libyaml-cpp-dev)
-- tensorflow (pip3 install tensorflow or pip3 install tensorflow-gpu)
+- tensorflow (pip3 install tensorflow==1.14 or pip3 install tensorflow-gpu==1.14))
+- tensorboard (pip3 install tensorboard==1.14)
 
 Now install pybind11 as following
 
+#### dependencies
+```commandline
+sudo apt-get install libpython[VERSION OF YOUR CHOICE]-dev
+```
+
+#### pybind11
 ```commandline
 cd $WORKSPACE
 git clone https://github.com/pybind/pybind11.git
@@ -62,7 +69,7 @@ export CXX=/usr/bin/g++-8 && export CC=/usr/bin/gcc-8
 Now compile raisimGym as
 
 ```
-python3 setup.py install --CMAKE_PREFIX_PATH LOCAL_BUILD --env /WHERE/YOUR/CUSTOM/ENVIRONMENT/IS
+python3 setup.py install --CMAKE_PREFIX_PATH $LOCAL_BUILD --env /WHERE/YOUR/CUSTOM/ENVIRONMENT/IS
 ```
 The "--env" directory should include a file called "Environment.hpp" which contains ENVIRONMENT class.
 
@@ -76,6 +83,14 @@ python3 setup.py install --CMAKE_PREFIX_PATH $LOCAL_BUILD --env $EXAMPLE_NAME
 You can make your own runner. To use the example runner, 
 ```$xslt
 python3 scripts/anymal_blind_locomotion.py
+```
+You can also test your trained model. To use the example runner,
+```$xslt
+python3 scripts/anymal_blind_locomotion.py --mode test --weight /WHERE/YOUR/CUSTOM/MODEL/IS
+```
+You can continue to improve your model based on pre-trained model. To use the example runner,
+```$xslt
+python3 scripts/anymal_blind_locomotion.py --mode retrain --weight /WHERE/YOUR/CUSTOM/MODEL/IS
 ```
 
 ## How to debug
